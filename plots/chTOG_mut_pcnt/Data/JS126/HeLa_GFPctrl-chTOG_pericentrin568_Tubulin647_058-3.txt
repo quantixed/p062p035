@@ -1,0 +1,1 @@
+C2-HeLa_GFPctrl-chTOG_pericentrin568_Tubulin647_058-3.tif: 3 objects detected (Size filter set to 10-1062500 voxels, threshold set to: 1200).

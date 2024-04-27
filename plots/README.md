@@ -4,6 +4,7 @@
 
 - Pericentrin quantification - `Pericentrin_quant`
 - Centrin-pericentrin quantification - `Centrin-pericentrin`
+- ch-TOG mutant pericentrin - `chTOG_mut_pcnt`
 
 
 ### Supplementary Figures

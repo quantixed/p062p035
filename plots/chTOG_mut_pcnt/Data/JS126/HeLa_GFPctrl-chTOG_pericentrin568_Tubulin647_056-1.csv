@@ -1,0 +1,3 @@
+ ,Volume (micron^3),Surface (micron^2),Nb of obj. voxels,Nb of surf. voxels,IntDen,Mean,StdDev,Median,Min,Max,X,Y,Z,Mean dist. to surf. (micron),SD dist. to surf. (micron),Median dist. to surf. (micron),XM,YM,ZM,BX,BY,BZ,B-width,B-height,B-depth
+1,6.700,28.492,675,307,1579042,2339.322,879.230,2153,1200,4095,132.483,103.908,8.335,1.129,0.215,1.144,132.515,103.866,8.339,128,97,4,11,15,9
+2,3.921,19.293,395,207,1030130,2607.924,1051.641,2303,1222,4095,194.752,132.172,9.582,0.966,0.266,0.977,194.748,132.201,9.543,192,127,5,6,11,10

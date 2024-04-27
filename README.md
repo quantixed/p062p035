@@ -14,6 +14,7 @@ James Shelford & Stephen J. Royle
 - Pericentrin quantification - `Pericentrin_quant`
 - Centrin-pericentrin quantification - `Centrin-pericentrin`
 - ch-TOG mutant pericentrin - `chTOG_mut_pcnt`
+- Sankey diagram - `Sankey`
 - Mitotic timing - `MitoticTiming`
 
 
@@ -26,6 +27,8 @@ James Shelford & Stephen J. Royle
 The R/Igor code can be executed with data placed into the `Data` folder of the RProject.
 
 Fiji scripts for image analysis are included in the `Script` folder of the respective project.
+
+Raw data (images) are not included for space reasons, only text outputs from image analysis steps.
 
 ## Development
 

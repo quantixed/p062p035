@@ -22,6 +22,7 @@ James Shelford & Stephen J. Royle
 ### Supplementary Figures
 
 - 3D Mitotic spindle analytics - `SpindleAnalytics`
+- Affimer knocksideways - `JS155`
 
 ### Notes
 

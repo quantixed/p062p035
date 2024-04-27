@@ -11,6 +11,7 @@ James Shelford & Stephen J. Royle
 ### Main Figures
 
 - mCherry-Affimer IP quantification - `IP_Quantification`
+- Spindle ch-TOG Quantification - `Spindle_Quantification`
 - Pericentrin quantification - `Pericentrin_quant`
 - Centrin-pericentrin quantification - `Centrin-pericentrin`
 - ch-TOG mutant pericentrin - `chTOG_mut_pcnt`

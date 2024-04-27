@@ -1,0 +1,1 @@
+C1-HeLa_mCherry-E8_Pericentrin488_Tubulin647_052-1.tif: 2 objects detected (Size filter set to 10-1062500 voxels, threshold set to: 1050).

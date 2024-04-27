@@ -3,7 +3,7 @@
 ### Main Figures
 
 - Pericentrin quantification - `Pericentrin_quant`
-- Figure
+- Centrin-pericentrin quantification - `Centrin-pericentrin`
 
 
 ### Supplementary Figures

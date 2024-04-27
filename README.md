@@ -10,7 +10,7 @@ James Shelford & Stephen J. Royle
 
 ### Main Figures
 
-- 3D Mitotic spindle analytics - `SpindleAnalytics`
+- mCherry-Affimer IP quantification - `IP_Quantification`
 - Pericentrin quantification - `Pericentrin_quant`
 - Centrin-pericentrin quantification - `Centrin-pericentrin`
 - ch-TOG mutant pericentrin - `chTOG_mut_pcnt`
@@ -20,7 +20,7 @@ James Shelford & Stephen J. Royle
 
 ### Supplementary Figures
 
-- Details here
+- 3D Mitotic spindle analytics - `SpindleAnalytics`
 
 ### Notes
 

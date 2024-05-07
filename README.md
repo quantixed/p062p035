@@ -4,7 +4,7 @@ Data and code for manuscript `p062p035`
 
 **Structural characterization and inhibition of the interaction between ch-TOG and TACC3**
 
-James Shelford & Stephen J. Royle
+James Shelford\*, Selena G. Burgess\*, Elena Rostkova, Mark W. Richards, Christian Tiede, Alistair J. Fielding, Tina Daviter, Darren C. Tomlinson, Antonio N. Calabrese, Mark Pfuhl\*\*, Richard Bayliss\*\* and Stephen J. Royle\*\*
 
 ## Code and data for recreation of plots
 

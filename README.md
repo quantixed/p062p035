@@ -6,6 +6,8 @@ Data and code for manuscript `p062p035`
 
 James Shelford\*, Selena G. Burgess\*, Elena Rostkova, Mark W. Richards, Christian Tiede, Alistair J. Fielding, Tina Daviter, Darren C. Tomlinson, Antonio N. Calabrese, Mark Pfuhl\*\*, Richard Bayliss\*\* and Stephen J. Royle\*\*
 
+*bioRxiv* 2024. DOI: [https://doi.org/10.1101/2024.05.31.596836](https://doi.org/10.1101/2024.05.31.596836)
+
 ## Code and data for recreation of plots
 
 ### Main Figures

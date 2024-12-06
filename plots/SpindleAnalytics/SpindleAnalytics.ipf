@@ -2,12 +2,14 @@
 #pragma rtGlobals=3				// Use modern global access method and strict wave access
 #pragma DefaultTab={3,20,4}		// Set default tab width in Igor Pro 9 and later
 #include "PXPUtils"
+#include "SuperPlot"
 
 ////////////////////////////////////////////////////////////////////////
 // Menu items
 ////////////////////////////////////////////////////////////////////////
 Menu "Macros"
 	"Spindle Analytics...",  SpindleERCalcWrapper()
+	"Collated Spindle Analytics...", FinalWrapper()
 	"Start Over", CleanSlate()
 	End
 End
@@ -31,6 +33,29 @@ Function SpindleERCalcWrapper()
 	WorkflowForSpindleERCalc()
 	WorkflowForSummary()
 	PXPUtils#MakeTheLayouts("p",5,4, saveit = 0)
+End
+
+Function FinalWrapper()
+	SetDataFolder root:
+	String wList, wName
+	wList = WaveList("resultMat_*", ";","")
+	// find all resultMats from different experiments (must be preloaded into Igor) and collate
+	Concatenate/O/NP=0 wList, resultMat
+	// do the same for fileName labels
+	wList = WaveList("fileNameWave_*", ";","")
+	Concatenate/O/NP=0/T wList, fileNameWave
+	Concatenate/O/NP=0/T wList, exptWave
+	Variable i, left = 0, right = 0
+	// because the * in fileNameWave is the expt name
+	for(i = 0; i < ItemsInList(wList); i += 1)
+		wName = StringFromList(i, wList)
+		Wave/T tw = $wName
+		right = left + numpnts(tw) - 1
+		exptWave[left,right] = ReplaceString("fileNameWave_",wName,"")
+		left = right + 1
+	endfor
+	WorkflowForAltSummary()
+	PXPUtils#MakeTheLayouts("p",5,3, saveit = 0)
 End
 
 ////////////////////////////////////////////////////////////////////////
@@ -318,7 +343,7 @@ Function WorkflowForSummary()
 	String str
 	SetDataFolder root:
 	
-	Make/O/N=(4)/T condNameWave = {"mCherry","E4","E7","E8"}
+	Make/O/N=(4)/T condNameWave = {"mCh","E4","E7","E8"}
 	WAVE/Z resultMat
 	WAVE/Z/T fileNameWave
 	Variable nFiles = numpnts(fileNameWave)
@@ -366,6 +391,51 @@ Function WorkflowForSummary()
 		SetAxis/A/E=1/N=1/W=$plotName left
 		ModifyBoxPlot/W=$plotName trace=$(StringFromList(i,parameters) + "_0"),whiskerMethod=4,markers={19,-1,19},markerSizes={2,2,2}
 		ModifyGraph/W=$plotName rgb=(65535,0,0,32768)
+	endfor
+End
+
+Function WorkflowForAltSummary()
+	String sList = "-C1_;-E4_;-E7_;-E8_;" // this is the list of substrings to classify the groups
+	String str
+	SetDataFolder root:
+	
+	Make/O/N=(4)/T condNameWave = {"mCh","E4","E7","E8"}
+	WAVE/Z resultMat
+	WAVE/Z/T fileNameWave, exptWave
+	Variable nFiles = numpnts(fileNameWave)
+	Make/O/N=(nFiles)/T condWave
+	
+	Variable i,j
+	
+	for(i = 0; i < nFiles; i += 1)
+		for(j = 0; j < ItemsInList(sList); j += 1)
+			str = StringFromList(j, sList)
+			if(stringmatch(fileNameWave[i],"*"+str+"*") == 1)
+				condWave[i] = condNameWave[j]
+			endif
+		endfor
+	endfor
+	
+	String parameters = PXPUtils#GetDimLabelsFromWave(resultMat,1)
+	Variable nParameters = ItemsInList(parameters)
+	String kvPairList = "spindleLength:Spindle Length (µm);spindlewidth:Spindle Width (µm);spindleAR:Spindle Aspect Ratio;spindleTheta:Spindle Angle (°);spindlePhi:Spindle Tilt (°);"
+	kvPairList += "d1:d1 (µm);d2:d2 (µm);ddiff:d2-d1 (µm);spindleOffset:Spindle Offset (µm);cellLength:Cell Length (µm);"
+	kvPairList += "spindleCellRatio:Spindle Cell Length Ratio;cellVol:Cell Volume (µm\\S3\\M);"
+	String plotName, wName
+	
+	for(i = 0; i < nParameters; i += 1)
+		// make a 1d wave of each parameter
+		wName = StringFromList(i,parameters)
+		Duplicate/O/RMD=[][i] resultMat, $wName
+		Wave w = $wName
+		Redimension/N=-1 w
+		
+		// superplot params
+		// rep, cond, meas
+		// width, auto, bars, stats = 0.4, 0, 1, 1
+		SuperplotHeadless(exptWave, condWave, w, 0.4, 0, 1, 1)
+		Label left StringByKey(StringFromList(i,parameters),kvPairList)
+		SetAxis/A/E=1/N=1 left
 	endfor
 End
 

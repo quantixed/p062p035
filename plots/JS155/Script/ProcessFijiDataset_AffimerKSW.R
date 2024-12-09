@@ -9,6 +9,7 @@ library(scales)
 library(cowplot)
 library(rstatix)
 library(ggpubr)
+library(cowplot)
 
 # wd should be fixed_ksw_figure
 # setup preferred directory structure in wd
@@ -173,12 +174,15 @@ axVal <- findAxisLimit(loVal,hiVal)
 
 # function to generate the plots
 makeTheScatterPlot <- function(preData, postData, yLab, xLab) {
-  ggplot(filter(df1, Category == preData | Category == postData),
-         aes(x=GFP_spindle_ratio, y=POI_spindle_ratio, color=Category, alpha=0.5)) +
-    geom_point() +
-    scale_x_continuous(trans='log2', limits = c(1/axVal,axVal), breaks = trans_breaks("log2", function(x) 2^x), labels = trans_format("log2", math_format(.x))) +
-    scale_y_continuous(trans='log2', limits = c(1/axVal,axVal), breaks = trans_breaks("log2", function(x) 2^x), labels = trans_format("log2", math_format(.x))) +
+  ggplot() +
+    geom_hline(yintercept = 1, linetype='dashed', colour='lightgrey') +
+    geom_vline(xintercept = 1, linetype='dashed', colour='lightgrey') +
+    geom_point(data = filter(df1, Category == preData | Category == postData),
+               aes(x=GFP_spindle_ratio, y=POI_spindle_ratio, color=Category, alpha=0.5), shape = 16) +
+    scale_x_continuous(trans='log2', limits = c(1/axVal,2^3), breaks = trans_breaks("log2", function(x) 2^x), labels = trans_format("log2", math_format(.x))) +
+    scale_y_continuous(trans='log2', limits = c(1,2^3), breaks = trans_breaks("log2", function(x) 2^x), labels = trans_format("log2", math_format(.x))) +
     labs(y = NULL, x = xLab) +
+    theme_cowplot(9) +
     theme(legend.position = 'none')
 }
 

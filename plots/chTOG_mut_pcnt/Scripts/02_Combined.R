@@ -17,6 +17,7 @@ library(multcomp)
 library(cowplot)
 library(ggpubr)
 library(scales)
+library(ggforce)
 
 # Load the dataframes (.rds) for each experiment. These should be in Output/Dataframe
 datadir <- 'Output/Dataframe'
@@ -185,6 +186,39 @@ ggsave("Output/Plots/pcnt_histo.pdf", p1, width = 69, height = 42, units = "mm")
 p2 <- sum_volume + theme(legend.position = 'none')
 
 ggsave("Output/Plots/pcnt_vol.pdf", p2, width = 70, height = 46, units = "mm")
+
+# Superplot of the data
+# make summaries of the data per experiment
+expt_df <- combined_df %>% 
+  group_by(Category, Experiment_number, pole_cat) %>%
+  summarise(mean = mean(sum_volume), sd = sd(sum_volume), n = n())
+
+# statistical test
+aov_res <- aov(mean ~ Category*pole_cat, data = expt_df)
+summary(aov_res)
+
+# prepare data for superplot
+combined_df$condAB <- paste0(combined_df$Category, "\n", ifelse(combined_df$pole_cat == "2", "2", "Multi"))
+expt_df$condAB <- paste0(expt_df$Category, "\n", ifelse(expt_df$pole_cat == "2", "2", "Multi"))
+# refactor so that x-axis is correct
+combined_df$condAB <- factor(combined_df$condAB, levels = c("GFP\n2","GFP\nMulti","WT chTOG\n2","WT chTOG\nMulti","LLAA\n2","LLAA\nMulti"))
+expt_df$condAB <- factor(expt_df$condAB, levels = c("GFP\n2","GFP\nMulti","WT chTOG\n2","WT chTOG\nMulti","LLAA\n2","LLAA\nMulti"))
+
+# plot the data
+ggplot() +
+  geom_sina(data = combined_df, aes(x = condAB, y = sum_volume, colour = Experiment_number, shape = pole_cat), alpha = 0.5, position = "auto", size = 0.8, maxwidth = 0.3) +
+  geom_point(data = expt_df, aes(x = condAB, y = mean, fill = Experiment_number), shape = 22, size = 1.5, stroke = 0.5, alpha = 0.7) +
+  scale_color_manual(values = c("#4477aa", "#ccbb44", "#ee6677", "#000000")) +
+  scale_fill_manual(values = c("#4477aa", "#ccbb44", "#ee6677", "#000000")) +
+  scale_shape_manual(values = c(1, 16)) +
+  labs(x = "", y = "Sum pericentrin volume (micron^3)") +
+  ylim(0, NA) +
+  theme_cowplot(9) +
+  theme(legend.position = "none")
+
+ggsave("Output/Plots/pcnt_vol2.pdf", width = 70, height = 50, units = "mm")
+
+# stats ----
 
 xtab <- as.table(rbind(
   c(num_conditions['GFP'] - num_GreaterThan2['GFP'], num_conditions['WT chTOG'] - num_GreaterThan2['WT chTOG'], num_conditions['LLAA'] - num_GreaterThan2['LLAA']),

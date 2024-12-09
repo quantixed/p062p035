@@ -287,6 +287,40 @@ p2 <- sum_volume + theme(legend.position = 'none')
 
 ggsave("Output/Plots/pcnt_vol.pdf", width = 88, height = 46, units = "mm")
 
+# Superplot of the data
+# make summaries of the data per experiment
+expt_df <- combined_df %>% 
+  group_by(Category, Experiment_number, pole_cat) %>%
+  summarise(mean = mean(sum_volume), sd = sd(sum_volume), n = n())
+
+# statistical test
+aov_res <- aov(mean ~ Category*pole_cat, data = expt_df)
+summary(aov_res)
+tukey_res <- TukeyHSD(aov_res)
+tukey_res
+
+# prepare data for superplot
+combined_df$condAB <- paste0(combined_df$Category, "\n", ifelse(combined_df$pole_cat == "2", "2", "Multi"))
+expt_df$condAB <- paste0(expt_df$Category, "\n", ifelse(expt_df$pole_cat == "2", "2", "Multi"))
+# remove mCherry C1_Multi and mCherry E7_Multi from the data because there are so few points
+combined2_df <- combined_df %>% filter(!(condAB == "mCherry C1\nMulti" | condAB == "mCherry E4\nMulti"))
+expt2_df <- expt_df %>% filter(!(condAB == "mCherry C1\nMulti" | condAB == "mCherry E4\nMulti"))
+
+# plot the data
+ggplot() +
+  geom_sina(data = combined2_df, aes(x = condAB, y = sum_volume, colour = Experiment_number, shape = pole_cat), alpha = 0.5, position = "auto", size = 0.8, maxwidth = 0.3) +
+  geom_point(data = expt2_df, aes(x = condAB, y = mean, fill = Experiment_number), shape = 22, size = 1.5, stroke = 0.5, alpha = 0.7) +
+  scale_color_manual(values = c("#4477aa", "#ccbb44", "#ee6677", "#000000")) +
+  scale_fill_manual(values = c("#4477aa", "#ccbb44", "#ee6677", "#000000")) +
+  scale_shape_manual(values = c(1, 16)) +
+  labs(x = "", y = "Sum pericentrin volume (micron^3)") +
+  ylim(0, NA) +
+  theme_cowplot(9) +
+  theme(legend.position = "none")
+
+ggsave("Output/Plots/pcnt_vol2.pdf", width = 88, height = 46, units = "mm")
+
+
 ### --------------- Does expression correlate with phenotype? ---------------
 
 # Referee 3 Point 2b asked if increased expression of E7 or E8 correlates with phenotype.

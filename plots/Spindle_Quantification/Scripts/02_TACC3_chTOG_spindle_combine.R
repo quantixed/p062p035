@@ -40,13 +40,13 @@ summary(combined_df$Category)
 # Plot the combined data using superplot
 bg <- ggplot() + 
   geom_hline(yintercept = 1, linetype='dashed', colour='black')
-TACC3_plot <- superplot(combined_df, TACC3_spindle_ratio, Category, Experiment_number,
+TACC3_plot <- superplot(combined_df, "TACC3_spindle_ratio", "Category", "Experiment_number",
                         ylab = 'TACC3 spindle recruitment', gg = bg) +
   ylim(0,6)
 
 TACC3_plot
 
-chTOG_plot <- superplot(combined_df, chTOG_spindle_ratio, Category, Experiment_number,
+chTOG_plot <- superplot(combined_df, "chTOG_spindle_ratio", "Category", "Experiment_number",
                         ylab = 'ch-TOG spindle recruitment', gg = bg) +
   ylim(0,4)
 

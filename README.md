@@ -4,7 +4,7 @@ Data and code for manuscript `p062p035`
 
 **Structural characterization and inhibition of the interaction between ch-TOG and TACC3**
 
-James Shelford\*, Selena G. Burgess\*, Elena Rostkova, Mark W. Richards, Christian Tiede, Alistair J. Fielding, Tina Daviter, Darren C. Tomlinson, Antonio N. Calabrese, Mark Pfuhl\*\*, Richard Bayliss\*\* and Stephen J. Royle\*\*
+James Shelford\*, Selena G. Burgess\*, Elena Rostkova, Mark W. Richards, Gabrielle Larocque, Josephina Sampson, Christian Tiede, Alistair J. Fielding, Tina Daviter, Darren C. Tomlinson, Antonio N. Calabrese, Mark Pfuhl\*\*, Richard Bayliss\*\* and Stephen J. Royle\*\*
 
 *bioRxiv* 2024. DOI: [https://doi.org/10.1101/2024.05.31.596836](https://doi.org/10.1101/2024.05.31.596836)
 
@@ -13,7 +13,8 @@ James Shelford\*, Selena G. Burgess\*, Elena Rostkova, Mark W. Richards, Christi
 ### Main Figures
 
 - mCherry-Affimer IP quantification - `IP_Quantification`
-- Spindle ch-TOG Quantification - `Spindle_Quantification`
+- Spindle ch-TOG quantification - `Spindle_Quantification`
+- Spindle tubulin quantification - `gl_tub`
 - Pericentrin quantification - `Pericentrin_quant`
 - Centrin-pericentrin quantification - `Centrin-pericentrin`
 - ch-TOG mutant pericentrin - `chTOG_mut_pcnt`
@@ -25,6 +26,8 @@ James Shelford\*, Selena G. Burgess\*, Elena Rostkova, Mark W. Richards, Christi
 
 - 3D Mitotic spindle analytics - `SpindleAnalytics`
 - Affimer knocksideways - `JS155`
+- Clathrin/TACC3 quantification - `gl_clat`
+- PCNT foci with nocodazole - `gl_noc`
 
 ### Notes
 

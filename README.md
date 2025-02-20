@@ -6,9 +6,8 @@ Data and code for manuscript `p062p035`
 
 James Shelford\*, Selena G. Burgess\*, Elena Rostkova, Mark W. Richards, Gabrielle Larocque, Josephina Sampson, Christian Tiede, Alistair J. Fielding, Tina Daviter, Darren C. Tomlinson, Antonio N. Calabrese, Mark Pfuhl\*\*, Richard Bayliss\*\* and Stephen J. Royle\*\*
 
-*J Cell Biol* 2025. in press.
+*J Cell Biol* (2025) 224: e202407002, doi: [10.1083/jcb.202407002](https://doi.org/10.1083/jcb.202407002).
 
-Preprint DOI: [https://doi.org/10.1101/2024.05.31.596836](https://doi.org/10.1101/2024.05.31.596836)
 
 ## Code and data for recreation of plots
 
